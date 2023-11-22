@@ -19,12 +19,24 @@ public abstract class Conta {
     }
 
     public boolean depositar(double valor){
-        //TODO: Verificar problemas no preenchimento
         saldo += valor;
         return true;
     }
 
     public abstract boolean sacar(double valor);
+
+    public boolean transferir(Conta conta, double valor){
+        try {
+            if(this.getSaldo() - valor < 0){
+                return false;
+            }
+            this.setSaldo(this.getSaldo() - valor);
+            conta.setSaldo(conta.getSaldo() + valor);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
 
     public int getAgencia() {
         return agencia;

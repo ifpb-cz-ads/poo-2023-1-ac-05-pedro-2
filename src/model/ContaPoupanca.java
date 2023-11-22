@@ -21,11 +21,15 @@ public class ContaPoupanca extends Conta{
 
     @Override
     public boolean sacar(double valor) {
-        //TODO: verificar as restrições
-        if(valor <= saldo){
             saldo -= valor;
             return true;
-        }else{
+    }
+
+    public boolean transferir(Conta conta, double valor){
+        if (this.sacar(valor)){
+            conta.depositar(valor);
+            return true;
+        } else {
             return false;
         }
     }
